@@ -27,13 +27,13 @@ public class CategoryController {
     List<Category> categoryList = getCategoryListService.getCategoryList();
 
     return new CategoryListDto(categoryList.stream()
-                                           .map(category -> toDto(category))
-                                           .toList());
+        .map(category -> toDto(category))
+        .toList());
   }
 
   private CategoryDto toDto(Category category) {
     return new CategoryDto(category.id()
-                                   .toString(), category.name());
+        .toString(), category.name());
   }
 
 }

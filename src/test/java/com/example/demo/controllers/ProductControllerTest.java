@@ -41,15 +41,15 @@ class ProductControllerTest {
   void getProducts()
       throws Exception {
     ProductSummaryDto productDto = new ProductSummaryDto("PRODUCT", new CategoryDto("CAT", "top"),
-                                                         new ImageDto("URL"), "PRODUCT", 100000L);
+        new ImageDto("URL"), "PRODUCT", 100000L);
     String categoryId = null;
 
     given(getProductListService.getProductListDto(categoryId)).willReturn(new ProductListDto(
         List.of(productDto)));
 
     mockMvc.perform(get("/products"))
-           .andExpect(status().isOk())
-           .andExpect(content().string(containsString("PRODUCT")));
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString("PRODUCT")));
   }
 
   @Test
@@ -61,14 +61,14 @@ class ProductControllerTest {
     List<ImageDto> images = List.of(new ImageDto("URL"));
     List<ProductOptionDto> options = List.of(
         new ProductOptionDto("OPTION1", "색상",
-                             List.of(new ProductOptionItemDto("ITEM1", "RED"))));
+            List.of(new ProductOptionItemDto("ITEM1", "RED"))));
 
     given(getProductDetailService.getProductDetail(productId)).willReturn(
         new ProductDetailDto(productId, category, images, "nice product",
-                             90L, options, "멋져용"));
+            90L, options, "멋져용"));
 
     mockMvc.perform(get("/products/%s".formatted(productId)))
-           .andExpect(status().isOk())
-           .andExpect(content().string(containsString("nice product")));
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString("nice product")));
   }
 }

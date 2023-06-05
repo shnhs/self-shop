@@ -32,7 +32,7 @@ public class ProductSummaryDtoFetcher {
           from images) i on p.id = i.product_id
         join categories c on p.category_id = c.id
         """;
-    
+
     if (categoryId != null) {
       sql += "where p.category_id = '%s'".formatted(categoryId);
     }

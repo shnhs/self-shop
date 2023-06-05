@@ -14,7 +14,7 @@ public record CategoryListDto(
 
     public static CategoryDto of(Category category) {
       return new CategoryDto(category.id()
-                                     .toString(), category.name());
+          .toString(), category.name());
     }
   }
 }

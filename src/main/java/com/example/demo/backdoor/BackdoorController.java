@@ -61,141 +61,141 @@ public class BackdoorController {
     LocalDateTime now = LocalDateTime.now();
 
     jdbcTemplate.update("""
-                            INSERT INTO categories (
-                                id, name, created_at, updated_at)
-                            VALUES (?, ?, ?, ?)
-                            """,
-                        "0BV000CAT0001", "top", now, now
-                       );
+            INSERT INTO categories (
+                id, name, created_at, updated_at)
+            VALUES (?, ?, ?, ?)
+            """,
+        "0BV000CAT0001", "top", now, now
+    );
 
     jdbcTemplate.update("""
-                            INSERT INTO categories (
-                                id, name, created_at, updated_at)
-                            VALUES (?, ?, ?, ?)
-                            """,
-                        "0BV000CAT0002", "outer", now, now
-                       );
+            INSERT INTO categories (
+                id, name, created_at, updated_at)
+            VALUES (?, ?, ?, ?)
+            """,
+        "0BV000CAT0002", "outer", now, now
+    );
     jdbcTemplate.update("""
-                            INSERT INTO categories (
-                                id, name, created_at, updated_at)
-                            VALUES (?, ?, ?, ?)
-                            """,
-                        "0BV000CAB0003", "bottom", now, now
-                       );
+            INSERT INTO categories (
+                id, name, created_at, updated_at)
+            VALUES (?, ?, ?, ?)
+            """,
+        "0BV000CAB0003", "bottom", now, now
+    );
   }
 
   private void createProducts() {
     LocalDateTime now = LocalDateTime.now();
 
     jdbcTemplate.update("""
-                            INSERT INTO products (
-                                id, category_id, name, price, description,
-                                created_at, updated_at)
-                            VALUES (?, ?, ?, ?, ?, ?, ?)
-                            """,
-                        "0BV000PRO0001", "0BV000CAT0001",
-                        "맨투맨", 128_000L, "편하게 입을 수 있는 맨투맨",
-                        now, now
-                       );
+            INSERT INTO products (
+                id, category_id, name, price, description,
+                created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """,
+        "0BV000PRO0001", "0BV000CAT0001",
+        "맨투맨", 128_000L, "편하게 입을 수 있는 맨투맨",
+        now, now
+    );
 
     jdbcTemplate.update("""
-                            INSERT INTO products (
-                                id, category_id, name, price, description,
-                                created_at, updated_at)
-                            VALUES (?, ?, ?, ?, ?, ?, ?)
-                            """,
-                        "0BV000PRO0002", "0BV000CAT0002",
-                        "셔츠", 118_000L, "편합니다",
-                        now, now
-                       );
+            INSERT INTO products (
+                id, category_id, name, price, description,
+                created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """,
+        "0BV000PRO0002", "0BV000CAT0002",
+        "셔츠", 118_000L, "편합니다",
+        now, now
+    );
   }
 
   private void createProductOptions() {
     LocalDateTime now = LocalDateTime.now();
 
     jdbcTemplate.update("""
-                            INSERT INTO product_options (
-                                id, product_id, name, created_at, updated_at)
-                            VALUES (?, ?, ?, ?, ?)
-                            """,
-                        "0BV000OPT0001", "0BV000PRO0001", "색상", now, now
-                       );
+            INSERT INTO product_options (
+                id, product_id, name, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+        "0BV000OPT0001", "0BV000PRO0001", "색상", now, now
+    );
 
     jdbcTemplate.update("""
-                            INSERT INTO product_options (
-                                id, product_id, name, created_at, updated_at)
-                            VALUES (?, ?, ?, ?, ?)
-                            """,
-                        "0BV000OPT0002", "0BV000PRO0001", "사이즈", now, now
-                       );
+            INSERT INTO product_options (
+                id, product_id, name, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+        "0BV000OPT0002", "0BV000PRO0001", "사이즈", now, now
+    );
   }
 
   private void createProductOptionItems() {
     LocalDateTime now = LocalDateTime.now();
 
     jdbcTemplate.update("""
-                            INSERT INTO product_option_items (
-                                id, product_option_id, name, created_at, updated_at)
-                            VALUES (?, ?, ?, ?, ?)
-                            """,
-                        "0BV000ITEM001", "0BV000OPT0001", "Black", now, now
-                       );
+            INSERT INTO product_option_items (
+                id, product_option_id, name, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+        "0BV000ITEM001", "0BV000OPT0001", "Black", now, now
+    );
 
     jdbcTemplate.update("""
-                            INSERT INTO product_option_items (
-                                id, product_option_id, name, created_at, updated_at)
-                            VALUES (?, ?, ?, ?, ?)
-                            """,
-                        "0BV000ITEM002", "0BV000OPT0001", "White", now, now
-                       );
+            INSERT INTO product_option_items (
+                id, product_option_id, name, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+        "0BV000ITEM002", "0BV000OPT0001", "White", now, now
+    );
 
     jdbcTemplate.update("""
-                            INSERT INTO product_option_items (
-                                id, product_option_id, name, created_at, updated_at)
-                            VALUES (?, ?, ?, ?, ?)
-                            """,
-                        "0BV000ITEM003", "0BV000OPT0002", "S", now, now
-                       );
+            INSERT INTO product_option_items (
+                id, product_option_id, name, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+        "0BV000ITEM003", "0BV000OPT0002", "S", now, now
+    );
 
     jdbcTemplate.update("""
-                            INSERT INTO product_option_items (
-                                id, product_option_id, name, created_at, updated_at)
-                            VALUES (?, ?, ?, ?, ?)
-                            """,
-                        "0BV000ITEM004", "0BV000OPT0002", "M", now, now
-                       );
+            INSERT INTO product_option_items (
+                id, product_option_id, name, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+        "0BV000ITEM004", "0BV000OPT0002", "M", now, now
+    );
 
     jdbcTemplate.update("""
-                            INSERT INTO product_option_items (
-                                id, product_option_id, name, created_at, updated_at)
-                            VALUES (?, ?, ?, ?, ?)
-                            """,
-                        "0BV000ITEM005", "0BV000OPT0002", "L", now, now
-                       );
+            INSERT INTO product_option_items (
+                id, product_option_id, name, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+        "0BV000ITEM005", "0BV000OPT0002", "L", now, now
+    );
   }
 
 
   private void createImages() {
     LocalDateTime now = LocalDateTime.now();
     jdbcTemplate.update("""
-                            INSERT INTO images (
-                                id, product_id, url, created_at, updated_at)
-                            VALUES (?, ?, ?, ?, ?)
-                            """,
-                        "0BV000IMG001", "0BV000PRO0001",
-                        "https://ahastudio.github.io/my-image-assets/images/cbcl-products/01.jpg",
-                        now, now
-                       );
+            INSERT INTO images (
+                id, product_id, url, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+        "0BV000IMG001", "0BV000PRO0001",
+        "https://ahastudio.github.io/my-image-assets/images/cbcl-products/01.jpg",
+        now, now
+    );
 
     jdbcTemplate.update("""
-                            INSERT INTO images (
-                                id, product_id, url, created_at, updated_at)
-                            VALUES (?, ?, ?, ?, ?)
-                            """,
-                        "0BV000IMG002", "0BV000PRO0002",
-                        "https://ahastudio.github.io/my-image-assets/images/cbcl-products/02.jpg",
-                        now, now
-                       );
+            INSERT INTO images (
+                id, product_id, url, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+        "0BV000IMG002", "0BV000PRO0002",
+        "https://ahastudio.github.io/my-image-assets/images/cbcl-products/02.jpg",
+        now, now
+    );
   }
 
 }

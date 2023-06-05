@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "products")
 public class Product extends BaseEntity {
-
+ 
   @EmbeddedId
   private ProductId id;
 
@@ -48,7 +48,7 @@ public class Product extends BaseEntity {
   }
 
   public Product(ProductId id, CategoryId categoryId, List<Image> images, String name, Money price,
-                 List<ProductOption> options, String description) {
+      List<ProductOption> options, String description) {
     this.id = id;
     this.categoryId = categoryId;
     this.images = images;

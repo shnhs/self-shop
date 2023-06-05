@@ -13,11 +13,11 @@ public record ProductOptionDto(
   public static ProductOptionDto of(ProductOption productOption) {
     return new ProductOptionDto(
         productOption.id()
-                     .toString(),
+            .toString(),
         productOption.name(),
         productOption.items()
-                     .stream()
-                     .map(ProductOptionItemDto::of)
-                     .toList());
+            .stream()
+            .map(ProductOptionItemDto::of)
+            .toList());
   }
 }

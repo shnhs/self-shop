@@ -20,19 +20,19 @@ public record ProductDetailDto(
   public static ProductDetailDto of(Product product, Category category) {
     return new ProductDetailDto(
         product.id()
-               .toString(),
+            .toString(),
         CategoryDto.of(category),
         product.images()
-               .stream()
-               .map(ImageDto::of)
-               .toList(),
+            .stream()
+            .map(ImageDto::of)
+            .toList(),
         product.name(),
         product.price()
-               .asLong(),
+            .asLong(),
         product.options()
-               .stream()
-               .map(ProductOptionDto::of)
-               .toList(),
+            .stream()
+            .map(ProductOptionDto::of)
+            .toList(),
         product.description()
     );
   }

@@ -20,7 +20,7 @@ public abstract class EntityId {
 
   public String newTsid() {
     return TSID.Factory.getTsid()
-                       .toString();
+        .toString();
   }
 
   @Override

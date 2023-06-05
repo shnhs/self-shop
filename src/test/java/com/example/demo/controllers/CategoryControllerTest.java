@@ -35,8 +35,8 @@ class CategoryControllerTest {
     given(getCategoryListService.getCategoryList()).willReturn(List.of(category));
 
     mockMvc.perform(get("/categories"))
-           .andExpect(status().isOk())
-           .andExpect(content().string(containsString("top")));
+        .andExpect(status().isOk())
+        .andExpect(content().string(containsString("top")));
   }
 
 }

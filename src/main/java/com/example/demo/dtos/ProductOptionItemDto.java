@@ -10,7 +10,7 @@ public record ProductOptionItemDto(
   public static ProductOptionItemDto of(ProductOptionItem productOptionItem) {
     return new ProductOptionItemDto(
         productOptionItem.id()
-                         .toString(),
+            .toString(),
         productOptionItem.name()
     );
   }

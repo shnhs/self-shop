@@ -15,7 +15,7 @@ public class GetProductDetailService {
   private final CategoryRepository categoryRepository;
 
   public GetProductDetailService(ProductRepository productRepository,
-                                 CategoryRepository categoryRepository) {
+      CategoryRepository categoryRepository) {
     this.productRepository = productRepository;
     this.categoryRepository = categoryRepository;
   }
@@ -23,9 +23,9 @@ public class GetProductDetailService {
   public ProductDetailDto getProductDetail(String productId) {
 
     Product product = productRepository.findById(new ProductId(productId))
-                                       .orElseThrow();
+        .orElseThrow();
     Category category = categoryRepository.findById(product.categoryId())
-                                          .orElseThrow();
+        .orElseThrow();
 
     return ProductDetailDto.of(product, category);
   }
