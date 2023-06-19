@@ -5,16 +5,20 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 public class AccessTokenAuthenticationFilter extends OncePerRequestFilter {
 
+  private final AccessTokenService accessTokenService;
+
   private static final String TOKEN_PREFIX = "Bearer ";
+
+  public AccessTokenAuthenticationFilter(AccessTokenService accessTokenService) {
+    this.accessTokenService = accessTokenService;
+  }
 
   @Override
   protected void doFilterInternal(HttpServletRequest request,
@@ -24,9 +28,8 @@ public class AccessTokenAuthenticationFilter extends OncePerRequestFilter {
     // request에서 토큰을 파싱해와서
     String accessToken = parseAccessToken(request);
 
-    // 토큰을 인증하고 TODO 토큰 서비스 만들어서 인증 처리
-    Authentication authentication =
-        new UsernamePasswordAuthenticationToken("User", null, List.of());
+    // 토큰을 인증하고
+    Authentication authentication = accessTokenService.authenticate(accessToken);
 
     // SecurityContext에 담는다.
     SecurityContextHolder.getContext()
