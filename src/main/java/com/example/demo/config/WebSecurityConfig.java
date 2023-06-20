@@ -3,6 +3,7 @@ package com.example.demo.config;
 import com.example.demo.security.AccessTokenAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,6 +32,11 @@ public class WebSecurityConfig {
 
     // 직접 만든 필터 추가함
     http.addFilterBefore(accessTokenAuthenticationFilter, BasicAuthenticationFilter.class);
+
+    // 일부 API는 인증인가 없이 접근
+    http.authorizeHttpRequests()
+        .requestMatchers(HttpMethod.POST, "/session").permitAll() //로그인
+        .requestMatchers(HttpMethod.GET, "/backdoor/**").permitAll(); // 백도어
 
     return http.build();
   }
