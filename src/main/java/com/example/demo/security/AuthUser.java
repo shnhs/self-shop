@@ -12,4 +12,9 @@ public record AuthUser(
       String roleUser, String userAccessToken) {
     return new AuthUser(userId, "", "", roleUser, userAccessToken);
   }
+
+  public static AuthUser of(
+      String id, String email, String password, String role) {
+    return new AuthUser(id, email, password, role, "");
+  }
 }
