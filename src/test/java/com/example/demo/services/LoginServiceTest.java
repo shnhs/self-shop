@@ -35,7 +35,7 @@ class LoginServiceTest {
     passwordEncoder = mock(PasswordEncoder.class);
 
     loginService = new LoginService(
-        authUserDao, accessTokenGenerator, passwordEncoder);
+        authUserDao, passwordEncoder, accessTokenGenerator);
   }
 
   @Test

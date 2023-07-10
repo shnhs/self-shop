@@ -1,10 +1,7 @@
 package com.example.demo.controllers;
 
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import com.example.demo.services.LoginService;
+import com.example.demo.services.LogoutService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,6 +11,12 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @WebMvcTest(SessionController.class)
 class SessionControllerTest extends ControllerTest {
 
@@ -22,6 +25,9 @@ class SessionControllerTest extends ControllerTest {
 
   @MockBean
   private LoginService loginService;
+
+  @MockBean
+  private LogoutService logoutService;
 
   @BeforeEach
   void setUp() {
@@ -72,5 +78,30 @@ class SessionControllerTest extends ControllerTest {
             .contentType(MediaType.APPLICATION_JSON)
             .content(json))
         .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  @DisplayName("DELETE /session - with correct access token")
+  void logoutWithCorrectAccessToken() throws Exception {
+    mockMvc.perform(delete("/session")
+            .header("Authorization", "Bearer " + userAccessToken))
+        .andExpect(status().isOk());
+
+    verify(logoutService).logout(userAccessToken);
+  }
+
+  @Test
+  @DisplayName("DELETE /session - with incorrect access token")
+  void logoutWithIncorrectAccessToken() throws Exception {
+    mockMvc.perform(delete("/session")
+            .header("Authorization", "Bearer XXX"))
+        .andExpect(status().isForbidden());
+  }
+
+  @Test
+  @DisplayName("DELETE /session - without access token")
+  void logoutWithoutAccessToken() throws Exception {
+    mockMvc.perform(delete("/session"))
+        .andExpect(status().isForbidden());
   }
 }
