@@ -14,7 +14,7 @@ public class LoginService {
   private final PasswordEncoder passwordEncoder;
 
   public LoginService(AuthUserDao authUserDao, AccessTokenGenerator accessTokenGenerator,
-      PasswordEncoder passwordEncoder) {
+                      PasswordEncoder passwordEncoder) {
     this.authUserDao = authUserDao;
     this.accessTokenGenerator = accessTokenGenerator;
     this.passwordEncoder = passwordEncoder;
@@ -27,7 +27,7 @@ public class LoginService {
         .map(authUser -> {
           String id = authUser.id();
           String token = accessTokenGenerator.generate(id);
-          authUserDao.addToken(id, token);
+          authUserDao.addAccessToken(id, token);
           return token;
         }).orElseThrow(() -> new BadCredentialsException("Login Failed!"));
   }

@@ -27,8 +27,7 @@ public class WebSecurityConfig {
   public SecurityFilterChain securityFilterChain(HttpSecurity http)
       throws Exception {
     http.cors();
-    http.csrf()
-        .disable();
+    http.csrf().disable();
 
     // 직접 만든 필터 추가함
     http.addFilterBefore(accessTokenAuthenticationFilter, BasicAuthenticationFilter.class);
@@ -36,8 +35,12 @@ public class WebSecurityConfig {
     // 일부 API는 인증인가 없이 접근
     http.authorizeHttpRequests()
         .requestMatchers(HttpMethod.POST, "/session").permitAll() //로그인
-        .requestMatchers(HttpMethod.GET, "/backdoor/**").permitAll(); // 백도어
-
+        .requestMatchers(HttpMethod.POST, "/users").permitAll() // 회원가입
+        .requestMatchers(HttpMethod.GET, "/backdoor/**").permitAll() // 백도어
+        .requestMatchers(HttpMethod.GET, "/categories").permitAll() // 카테고리 보기
+        .requestMatchers(HttpMethod.GET, "/products").permitAll() // 물건 보기
+        .anyRequest().authenticated();
+    
     return http.build();
   }
 
