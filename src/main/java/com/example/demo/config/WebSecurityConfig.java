@@ -38,9 +38,9 @@ public class WebSecurityConfig {
         .requestMatchers(HttpMethod.POST, "/users").permitAll() // 회원가입
         .requestMatchers(HttpMethod.GET, "/backdoor/**").permitAll() // 백도어
         .requestMatchers(HttpMethod.GET, "/categories").permitAll() // 카테고리 보기
-        .requestMatchers(HttpMethod.GET, "/products").permitAll() // 물건 보기
+        .requestMatchers(HttpMethod.GET, "/products/**").permitAll() // 물건 보기
         .anyRequest().authenticated();
-    
+
     return http.build();
   }
 
