@@ -3,6 +3,7 @@ package com.example.demo.models;
 import io.hypersistence.tsid.TSID;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+
 import java.util.Objects;
 
 @MappedSuperclass
@@ -18,7 +19,7 @@ public abstract class EntityId {
     this.value = value;
   }
 
-  public String newTsid() {
+  public static String newTsid() {
     return TSID.Factory.getTsid()
         .toString();
   }

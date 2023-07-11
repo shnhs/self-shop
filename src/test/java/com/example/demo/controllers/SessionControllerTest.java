@@ -36,7 +36,7 @@ class SessionControllerTest extends ControllerTest {
   }
 
   @Test
-  @DisplayName("POST /session - with correct AccessToken")
+  @DisplayName("GET /session - with correct AccessToken")
   void loginWithAccessToken() throws Exception {
     String json = """
         {
@@ -51,7 +51,7 @@ class SessionControllerTest extends ControllerTest {
   }
 
   @Test
-  @DisplayName("POST /session - with incorrect AccessToken")
+  @DisplayName("GET /session - with incorrect AccessToken")
   void loginWithIncorrectAccessToken() throws Exception {
     String json = """
         {
