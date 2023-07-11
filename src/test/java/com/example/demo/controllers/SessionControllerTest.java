@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.mockito.BDDMockito.given;
@@ -31,19 +32,26 @@ class SessionControllerTest extends ControllerTest {
 
   @BeforeEach
   void setUp() {
-    given(loginService.login("tester@example", "password"))
-        .willReturn(userAccessToken);
+    given(loginService.login("tester@example.com", "password"))
+        .willReturn("Tester.Access.Token");
+
+    given(loginService.login("xxx", "password"))
+        .willThrow(new BadCredentialsException("Login failed"));
+
+    given(loginService.login("tester@example.com", "xxx"))
+        .willThrow(new BadCredentialsException("Login failed"));
   }
 
   @Test
-  @DisplayName("GET /session - with correct AccessToken")
-  void loginWithAccessToken() throws Exception {
+  @DisplayName("POST /session - with correct email and password")
+  void loginSuccess() throws Exception {
     String json = """
         {
-          "username": "tester@example.com",
-          "password": "password"
+            "email": "tester@example.com",
+            "password": "password"
         }
         """;
+
     mockMvc.perform(post("/session")
             .contentType(MediaType.APPLICATION_JSON)
             .content(json))
@@ -51,14 +59,15 @@ class SessionControllerTest extends ControllerTest {
   }
 
   @Test
-  @DisplayName("GET /session - with incorrect AccessToken")
-  void loginWithIncorrectAccessToken() throws Exception {
+  @DisplayName("POST /session - with incorrect email")
+  void loginWithIncorrectUsername() throws Exception {
     String json = """
         {
-          "username": "tester@example.com",
-          "password": "wrong"
+            "email": "xxx",
+            "password": "password"
         }
         """;
+
     mockMvc.perform(post("/session")
             .contentType(MediaType.APPLICATION_JSON)
             .content(json))
@@ -66,14 +75,15 @@ class SessionControllerTest extends ControllerTest {
   }
 
   @Test
-  @DisplayName("GET /session - without AccessToken")
-  void loginWithoutAccessToken() throws Exception {
+  @DisplayName("POST /session - with incorrect password")
+  void loginWithIncorrectPassword() throws Exception {
     String json = """
         {
-          "username": "nope",
-          "password": "password"
+            "email": "tester@example.com",
+            "password": "xxx"
         }
         """;
+
     mockMvc.perform(post("/session")
             .contentType(MediaType.APPLICATION_JSON)
             .content(json))
