@@ -1,13 +1,7 @@
 package com.example.demo.models;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OrderBy;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,5 +39,13 @@ public class ProductOption extends BaseEntity {
 
   public List<ProductOptionItem> items() {
     return items;
+  }
+
+  public int itemSize() {
+    return items.size();
+  }
+
+  public ProductOptionItem item(int index) {
+    return items.get(index);
   }
 }

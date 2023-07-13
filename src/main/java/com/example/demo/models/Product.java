@@ -1,22 +1,14 @@
 package com.example.demo.models;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OrderBy;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "products")
 public class Product extends BaseEntity {
- 
+
   @EmbeddedId
   private ProductId id;
 
@@ -48,7 +40,7 @@ public class Product extends BaseEntity {
   }
 
   public Product(ProductId id, CategoryId categoryId, List<Image> images, String name, Money price,
-      List<ProductOption> options, String description) {
+                 List<ProductOption> options, String description) {
     this.id = id;
     this.categoryId = categoryId;
     this.images = images;
@@ -82,7 +74,19 @@ public class Product extends BaseEntity {
     return options;
   }
 
+  public int imageSize() {
+    return images.size();
+  }
+
   public String description() {
     return description;
+  }
+
+  public int optionSize() {
+    return options.size();
+  }
+
+  public ProductOption option(int index) {
+    return options.get(index);
   }
 }
